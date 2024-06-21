@@ -46,7 +46,8 @@ func setAcrobatReadOnlyMode() error {
 	fmt.Println("Registry values set successfully to configure Acrobat in read-only mode.")
 	return nil
 }
-
+// Function to check if Adobe Acrobat is installed already.
+// TODO: fix this so that we can still install using a -force switch in case this has unintended results 
 func findUninstallKey(displayName string, uninstallString bool) ([]string, error) {
 	var uninstallList []string
 	keys := []string{
@@ -94,6 +95,7 @@ func findUninstallKey(displayName string, uninstallString bool) ([]string, error
 	return uninstallList, nil
 }
 
+// Function to download File
 func downloadFile(url, path string, attempts int, skipSleep bool) error {
 	for i := 0; i < attempts; i++ {
 		if !skipSleep && i > 0 {
@@ -128,6 +130,7 @@ func downloadFile(url, path string, attempts int, skipSleep bool) error {
 	return fmt.Errorf("failed to download file after %d attempts", attempts)
 }
 
+// Function for expanding the archive
 func extractZip(src, dest string) error {
 	r, err := zip.OpenReader(src)
 	if err != nil {
